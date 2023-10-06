@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
+const jwt = require("jsonwebtoken");
+const bcryptjs = require("bcryptjs")
 const User = require("../models/user");
 
 router.post("/signup", (req, res, next) => {
@@ -15,7 +15,7 @@ router.post("/signup", (req, res, next) => {
           message: "Mail exists"
         });
       } else {
-        bcrypt.hash(req.body.password, 10, (err, hash) => {
+        bcryptjs.hash(req.body.password, 10, (err, hash) => {
           if (err) {
             return res.status(500).json({
               error: err
