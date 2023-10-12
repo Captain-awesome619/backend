@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 });
 app.use("/user", userRoutes);
 app.use((req, res, next) => {
-  const error = new Error("DONT WORRY ITS WORKING");
+  const error = new Error("error");
   error.status = 404;
   next(error);
 });
@@ -35,9 +35,6 @@ app.use((error, req, res, next) => {
     }
   });
 });
-
-
-
 app.use((req, res, next) => {
 res.status(200).json({
     message : "hmmmmpf"
