@@ -132,7 +132,7 @@ app.delete("/:userId", (req, res, next) => {
       });
       console.log("the" + oldUser._id)
       res.json("Your passoword has been sent to your mail")
-      const link = `https:/backend-three-neon.vercel.app/user/reset-password/${oldUser._id}/${token}`;
+      const link = `https://backend-three-neon.vercel.app/user/reset-password/${oldUser._id}/${token}`;
 
       var transporter = nodemailer.createTransport({
         service: "gmail",
@@ -146,7 +146,7 @@ app.delete("/:userId", (req, res, next) => {
         from: "ogunsolatoluwalase@gmail.com",
         to: oldUser.email,
         subject: "your password Reset link",
-        text: link
+        text:"reset link" + "" + "" + link
       };
 
       transporter.sendMail(mailOptions, function (error, info) {
