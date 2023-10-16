@@ -134,7 +134,7 @@ app.delete("/:userId", (req, res, next) => {
       });
       console.log("the" + oldUser._id)
       res.json("Your passoword has been sent to your mail")
-      const link = `https://backend-three-neon.vercel.app/user/reset-password/${oldUser._id}/${token}`;
+      const link = `http://localhost:3000/forgotpassword/user/reset-password/${oldUser._id}/${token}`;
 
       var transporter = nodemailer.createTransport({
         service: "gmail",
