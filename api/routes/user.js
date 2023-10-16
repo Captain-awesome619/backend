@@ -126,7 +126,7 @@ app.delete("/:userId", (req, res, next) => {
       const secret = process.env.JWT_KEY + oldUser.password;
       console.log(secret)
       const token = jwt.sign({ email: oldUser.email, id:oldUser._id }, secret, {
-        expiresIn: "10m",
+        expiresIn: "5m",
       });
       console.log("the" + oldUser._id)
       res.json("Your passoword has been sent to your mail")
