@@ -5,6 +5,10 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const userRoutes = require('./api/routes/user');
 mongoose.connect("mongodb+srv://captain-awesome:"+ process.env.MONGO_ATLAS_PW + "@cluster0.7i85gm6.mongodb.net/?retryWrites=true&w=majority",
+{
+  useNewUrlParser: true,
+}
+
 )
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
