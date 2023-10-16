@@ -121,7 +121,9 @@ app.delete("/:userId", (req, res, next) => {
       const oldUser = await User.findOne({ email });
       console.log(email)
       if (!oldUser) {
-        return res.json({ status: "User Does Not Exists!!" });
+        return res.status(404).json({
+          message: "user does not exist"
+        });
       }
       const secret = process.env.JWT_KEY + oldUser.password;
       console.log(secret)
