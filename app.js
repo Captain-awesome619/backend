@@ -8,8 +8,11 @@ mongoose.connect("mongodb+srv://captain-awesome:"+ process.env.MONGO_ATLAS_PW + 
 {
   useNewUrlParser: true,
 }
-
 )
+
+
+
+
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

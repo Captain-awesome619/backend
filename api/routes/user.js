@@ -6,10 +6,12 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs")
 const User = require("../models/user");
-var nodemailer = require("nodemailer");
-app.set("view engine", "ejs");
-app.set('views', 'views')
+const path = require('node:path')
 app.use(express.urlencoded({ extended: false }));
+app.set("views" , "/views/index.ejs")
+app.set('view engine', 'ejs');
+
+var nodemailer = require("nodemailer");
 app.post("/signup", (req, res, next) => {
   User.find({ email: req.body.email })
     .exec()
@@ -146,7 +148,7 @@ app.delete("/:userId", (req, res, next) => {
         from: "ogunsolatoluwalase@gmail.com",
         to: oldUser.email,
         subject: "your password Reset link",
-        text:"reset link" + "" + "" + link
+        text:link
       };
 
       transporter.sendMail(mailOptions, function (error, info) {
@@ -156,7 +158,6 @@ app.delete("/:userId", (req, res, next) => {
           console.log("Email sent: " + info.response);
         }
       });
-
       console.log(link);
       console.log(User)
 
