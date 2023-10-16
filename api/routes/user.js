@@ -1,19 +1,12 @@
 
 const express = require("express");
 const app = express();
-
 app.use(express.json());
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs")
-const bcrypt = require("bcrypt")
 const User = require("../models/user");
-const user = require("../models/user");
-const json = require("body-parser/lib/types/json");
-const bodyParser = require("body-parser")
 var nodemailer = require("nodemailer");
-
-
 app.set("view engine", "ejs");
 app.set('views', 'views')
 app.use(express.urlencoded({ extended: false }));
