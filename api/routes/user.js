@@ -142,7 +142,7 @@ app.delete("/:userId", (req, res, next) => {
       var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user:  process.env.USER,
+          user:  "ogunsolatoluwalase@gmail.com",
           pass:  process.env.USER_PWD,
         },
       });
