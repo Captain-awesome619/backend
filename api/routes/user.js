@@ -133,8 +133,8 @@ app.delete("/:userId", (req, res, next) => {
         expiresIn: "5m",
       });
       console.log("the" + oldUser._id)
-      res.json("Your passoword has been sent to your mail")
-      const link = `http://localhost:3000/forgotpassword/user/reset-password/${oldUser._id}/${token}`;
+      res.json("Your password has been sent to your mail")
+      const link = `https://backend-three-neon.vercel.app/user/reset-password/${oldUser._id}/${token}`;
 
       var transporter = nodemailer.createTransport({
         service: "gmail",
