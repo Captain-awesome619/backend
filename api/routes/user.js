@@ -8,7 +8,8 @@ const bcryptjs = require("bcryptjs")
 const User = require("../models/user");
 const path = require('node:path')
 app.use(express.urlencoded({ extended: false }));
-app.set("views" , "/views/index.ejs")
+
+app.set("views" , "views")
 app.set('view engine', 'ejs');
 
 var nodemailer = require("nodemailer");
@@ -134,22 +135,15 @@ app.delete("/:userId", (req, res, next) => {
       });
       console.log("the" + oldUser._id)
       res.json("Your password has been sent to your mail")
-      const link = `http://localhost:3000//user/reset-password/${oldUser._id}/${token}`;
+      const link = `https://backend-three-neon.vercel.app/user/reset-password/${oldUser._id}/${token}`;
 
       var transporter = nodemailer.createTransport({
-        service: "gmail",
+       service : "gmail",
         auth: {
           user:  "ogunsolatoluwalase@gmail.com",
           pass:  process.env.USER_PWD,
         },
       });
-
-      var mailOptions = {
-        from: "ogunsolatoluwalase@gmail.com",
-        to: oldUser.email,
-        subject: "your password Reset link",
-        text:link
-      };
 
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
@@ -158,6 +152,15 @@ app.delete("/:userId", (req, res, next) => {
           console.log("Email sent: " + info.response);
         }
       });
+
+      var mailOptions = {
+        from: "ogunsolatoluwalase@outlook.com",
+        to: email,
+        subject: "your password Reset link",
+        text:link
+      };
+
+
       console.log(link);
       console.log(User)
 
@@ -208,7 +211,7 @@ console.log("the changing password" + password)
       );
       res.render("index", { email: verify.email, status: "verified" });
       console.log("this is the new" + encryptedPassword)
-      res.json("password reset successfully")
+
     } catch (error) {
       console.log(error);
       res.json({ status: "Something Went Wrong" });
