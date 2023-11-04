@@ -1,5 +1,7 @@
 
 const express = require("express");
+
+const express = require("express");
 const app = express();
 app.use(express.json());
 const mongoose = require("mongoose");
@@ -137,50 +139,28 @@ app.delete("/:userId", (req, res, next) => {
       res.json("Your password has been sent to your mail")
       const link = `https://backend-three-neon.vercel.app/user/reset-password/${oldUser._id}/${token}`;
 
-      const transporter = nodemailer.createTransport({
-        port: 465,
-    host: "smtp.gmail.com",
+      var transporter = nodemailer.createTransport({
+       service : "gmail",
         auth: {
-          user:  process.env.USER,
+          user:  "ogunsolatoluwalase@gmail.com",
           pass:  process.env.USER_PWD,
         },
-        secure: true,
       });
 
-      await new Promise((resolve, reject) => {
-        transporter.verify(function (error, success) {
-            if (error) {
-                console.log(error);
-                reject(error);
-            } else {
-                console.log("Server is ready to take our messages");
-                resolve(success);
-            }
-        });
-    });
-
-    var mailOptions = {
-      from: "ogunsolatoluwalase@gmail.com",
-      to: email,
-      subject: "your password Reset link",
-      text:link
-    };
-
-    await new Promise((resolve, reject) => {
-      transporter.sendMail(mailOptions, (err, info) => {
-          if (err) {
-              console.error(err);
-              reject(err);
-          } else {
-              console.log(info);
-              console.log(mailOptions)
-              resolve(info);
-          }
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
       });
-  });
 
-
-
+      var mailOptions = {
+        from: "ogunsolatoluwalase@outlook.com",
+        to: email,
+        subject: "your password Reset link",
+        text:link
+      };
 
 
       console.log(link);
