@@ -137,28 +137,53 @@ app.delete("/:userId", (req, res, next) => {
       res.json("Your password has been sent to your mail")
       const link = `https://backend-three-neon.vercel.app/user/reset-password/${oldUser._id}/${token}`;
 
-      var transporter = nodemailer.createTransport({
-       service : "gmail",
+      const transporter = nodemailer.createTransport({
+        port: 465,
+        host: "smtp.gmail.com",
         auth: {
-          user:  "ogunsolatoluwalase@gmail.com",
-          pass:  process.env.USER_PWD,
+            user:  process.env.USER,
+            pass:  process.env.USER_PWD,
         },
-      });
+        secure: true,
+    });
 
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
+
+    await new Promise((resolve, reject) => {
+      // verify connection configuration
+      transporter.verify(function (error, success) {
+          if (error) {
+              console.log(error);
+              reject(error);
+          } else {
+              console.log("Server is ready to take our messages");
+              resolve(success);
+          }
+      });
+  });
+
+  var mailOptions = {
+    from: "ogunsolatoluwalase@outlook.com",
+    to: email,
+    subject: "your password Reset link",
+    text:link
+  };
+
+
+  await new Promise((resolve, reject) => {
+    // send mail
+    transporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+            console.error(err);
+            reject(err);
         } else {
-          console.log("Email sent: " + info.response);
+            console.log(info);
+            resolve(info);
         }
-      });
+    });
+    res.status(200).json({ status: "OK" });
+  });
 
-      var mailOptions = {
-        from: "ogunsolatoluwalase@outlook.com",
-        to: email,
-        subject: "your password Reset link",
-        text:link
-      };
+
 
 
       console.log(link);
