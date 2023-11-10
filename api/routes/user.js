@@ -9,7 +9,6 @@ const User = require("../models/user");
 const path = require('node:path')
 app.use(express.urlencoded({ extended: false }));
 
-app.set("views" , "views")
 app.set('view engine', 'ejs');
 
 var nodemailer = require("nodemailer");
@@ -146,7 +145,6 @@ app.delete("/:userId", (req, res, next) => {
 
     });
 
-
     await new Promise((resolve, reject) => {
       // verify connection configuration
       transporter.verify(function (error, success) {
@@ -202,7 +200,7 @@ console.log("the changing password" + password)
     const secret =  process.env.JWT_KEY + oldUser.password;
     try {
       const verify = jwt.verify(token, secret);
-      res.render('index',{email: verify.email,status: "Not Verified" });
+      res.render('index.ejs',{email: verify.email,status: "Not Verified" });
     } catch (error) {
       console.log(error);
       console.log(error)
