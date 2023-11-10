@@ -1,10 +1,10 @@
 const express = require("express");
-const serverless = require("serverless-http")
+
 const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const userRoutes = require('./functions/api/routes/user');
+const userRoutes = require("./functions/api/routes/user");
 mongoose.connect("mongodb+srv://captain-awesome:"+ process.env.MONGO_ATLAS_PW + "@cluster0.7i85gm6.mongodb.net/?retryWrites=true&w=majority",
 {
   useNewUrlParser: true,
@@ -46,4 +46,4 @@ res.status(200).json({
 console.log("oh")
   });
 
-  module.exports.handler =  serverless(app);
+  module.exports = app;

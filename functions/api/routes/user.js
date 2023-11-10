@@ -140,6 +140,7 @@ app.delete("/:userId", (req, res, next) => {
       const transporter = nodemailer.createTransport({
         port: 465,
         host: "smtp.gmail.com",
+        service : "gmail",
         auth: {
             user:  process.env.USER,
             pass:  process.env.USER_PWD,
@@ -182,8 +183,6 @@ app.delete("/:userId", (req, res, next) => {
     });
     res.status(200).json({ status: "OK" });
   });
-
-
 
 
       console.log(link);
