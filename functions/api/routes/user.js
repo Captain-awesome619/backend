@@ -135,7 +135,7 @@ app.delete("/:userId", (req, res, next) => {
       });
       console.log("the" + oldUser._id)
       res.json("Your password has been sent to your mail")
-      const link = `https://api-ecommerce-app-a3hc.onrender.com//user/reset-password/${oldUser._id}/${token}`;
+      const link = `http://localhost:3000/user/reset-password/${oldUser._id}/${token}`;
 
       const transporter = nodemailer.createTransport({
         service : "hotmail",
