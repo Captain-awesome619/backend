@@ -138,9 +138,9 @@ app.delete("/:userId", (req, res, next) => {
       const link = `https://backend-three-neon.vercel.app/user/reset-password/${oldUser._id}/${token}`;
 
       const transporter = nodemailer.createTransport({
-
         service : "hotmail",
         auth: {
+          type : "OAuth2",
             user:  process.env.USER,
             pass:  process.env.USER_PWD,
         },
@@ -170,7 +170,6 @@ app.delete("/:userId", (req, res, next) => {
 
 
   await new Promise((resolve, reject) => {
-    // send mail
     transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
             console.error(err);
@@ -180,7 +179,7 @@ app.delete("/:userId", (req, res, next) => {
             resolve(info);
         }
     });
-    res.status(200).json({ status: "OK" });
+
   });
 
 
