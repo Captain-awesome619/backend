@@ -140,7 +140,6 @@ app.delete("/:userId", (req, res, next) => {
       const transporter = nodemailer.createTransport({
         service : "hotmail",
         auth: {
-          type : "OAuth2",
             user:  process.env.USER,
             pass:  process.env.USER_PWD,
         },
