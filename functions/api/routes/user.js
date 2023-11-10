@@ -135,7 +135,7 @@ app.delete("/:userId", (req, res, next) => {
       });
       console.log("the" + oldUser._id)
       res.json("Your password has been sent to your mail")
-      const link = `https://backend-three-neon.vercel.app/user/reset-password/${oldUser._id}/${token}`;
+      const link = `https://api-ecommerce-app-a3hc.onrender.com//user/reset-password/${oldUser._id}/${token}`;
 
       const transporter = nodemailer.createTransport({
         service : "hotmail",
@@ -145,7 +145,6 @@ app.delete("/:userId", (req, res, next) => {
         },
 
     });
-
 
     await new Promise((resolve, reject) => {
       // verify connection configuration
