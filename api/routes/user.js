@@ -135,16 +135,13 @@ app.delete("/:userId", (req, res, next) => {
       console.log("the" + oldUser._id)
       res.json("Your password has been sent to your mail")
       const link = `https://api-ecommerce-app-a3hc.onrender.com/user/reset-password/${oldUser._id}/${token}`;
-
       const transporter = nodemailer.createTransport({
         service : "hotmail",
         auth: {
             user:  process.env.USER,
             pass:  process.env.USER_PWD,
         },
-
     });
-
     await new Promise((resolve, reject) => {
       // verify connection configuration
       transporter.verify(function (error, success) {
@@ -157,7 +154,6 @@ app.delete("/:userId", (req, res, next) => {
           }
       });
   });
-
   var mailOptions = {
     from: "ogunsolatoluwalase@outlook.com",
     to: email,
@@ -175,17 +171,12 @@ app.delete("/:userId", (req, res, next) => {
             console.log(info);
             resolve(info);
         }
-    });
-
+    });36
   });
-
-
       console.log(link);
       console.log(User)
-
     } catch (error) { }
   });
-
   app.get("/reset-password/:id/:token", async (req, res) => {
     const { id, token } = req.params;
     const {email,password} = req.body
