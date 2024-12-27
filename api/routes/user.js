@@ -55,6 +55,33 @@ app.post("/signup", (req, res, next) => {
 
     );
 });
+
+app.get("/get-username/:email", (req, res, next) => {
+  const email = req.params.email;
+  User.find({ email: email })  
+    .exec()
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({
+          message: "User not found"
+        });
+      } else {
+        
+        res.status(200).json({
+          fullname: user.fullname
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+
+
 app.delete("/:userId", (req, res, next) => {
     User.deleteOne({ _id: req.params.userId })
       .exec()
@@ -99,7 +126,8 @@ app.delete("/:userId", (req, res, next) => {
             );
             return res.status(200).json({
               message: "Authentication successful",
-              token: token
+              token: token,
+              username : user[0].fullname
             });
           }
           res.status(401).json({
