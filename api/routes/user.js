@@ -163,13 +163,17 @@ app.delete("/:userId", (req, res, next) => {
       console.log("the" + oldUser._id)
       res.json("Your password has been sent to your mail")
       const link = `https://api-ecommerce-app-a3hc.onrender.com/user/reset-password/${oldUser._id}/${token}`;
-      const transporter = nodemailer.createTransport({
-        service : "hotmail",
-        auth: {
-            user:  process.env.USER,
-            pass:  process.env.USER_PWD,
-        },
-    });
+
+     const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465, // Use 587 for TLS
+  secure: true, // true for SSL, false for TLS
+  auth: {
+    user: "ogunsolatoluwalase@gmail.com", // Your Gmail email
+    pass: "yvoc qpns babv wohw",    // Your app password (not the account password)
+  },
+});
+
     await new Promise((resolve, reject) => {
       // verify connection configuration
       transporter.verify(function (error, success) {
@@ -182,8 +186,11 @@ app.delete("/:userId", (req, res, next) => {
           }
       });
   });
+
+
+  
   var mailOptions = {
-    from: "ogunsolatoluwalase@outlook.com",
+    from: "ogunsolatoluwalase@gmail.com",
     to: email,
     subject: "your password Reset link",
     text:link
