@@ -166,11 +166,11 @@ app.delete("/:userId", (req, res, next) => {
 
      const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 465, // Use 587 for TLS
-  secure: true, // true for SSL, false for TLS
+  port: 465, 
+  secure: true, 
   auth: {
-    user: "ogunsolatoluwalase@gmail.com", // Your Gmail email
-    pass: "yvoc qpns babv wohw",    // Your app password (not the account password)
+    user:  process.env.USER, 
+    pass:  process.env.USER_PWD,   
   },
 });
 
